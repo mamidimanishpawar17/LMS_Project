@@ -1,0 +1,34 @@
+﻿using LMS_API_DataLayer.Models.Issues;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+
+namespace LMS_API_DataLayer.Models.Members
+{
+    [Index(nameof(UserName), IsUnique = true)]
+    [Index(nameof(FirstName), IsUnique = true)]
+    [Index(nameof(PhoneNumber), IsUnique = true)]
+    public class Member
+    {
+        [Key]
+        public int MemberId { get; set; }
+        [Required]
+        public string FirstName { get; set; }
+        [Required]
+        public string LastName { get; set; }
+        [Required]
+        [MaxLength(20)]
+        public string UserName { get; set; }
+        [Required]
+        public string PhoneNumber { get; set; }
+        [Required]
+        public string Password { get; set; }
+        [Required]
+        public string Email { get; set; }
+        [Required]
+        public int Fine { get; set; }
+        public MemberType MemberType { get; set; }
+        public ICollection<Issue> Issues { get; set; }
+
+
+    }
+}
