@@ -1,0 +1,63 @@
+﻿@model IEnumerable<LMS_WEB.Models.DTO.Subjects.SubjectDTO>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpAcc
+@using LMS_Utility;
+
+<br />
+<div class="container p-4 border">
+    <div class="row pb-2">
+        <div class="col">
+            <h1 class="text-primary">Subject List</h1>
+        </div>
+        <div class="col text-end pt-1">
+            @if (httpAcc.HttpContext.Session.GetString(SD.SessionToken) != null &&
+            httpAcc.HttpContext.Session.GetString(SD.SessionToken).ToString().Length > 0)
+            {
+                <a asp-controller="Subject" asp-action="CreateSubject" class="btn btn-outline-primary"><i class="bi bi-plus-square-fill"></i> Create New Subject</a>
+            }
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    SubjectId
+                </th>
+                <th>
+                    Name
+                </th>
+
+
+
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.SubjectId</td>
+                    <td>@item.Name</td>
+
+
+
+
+
+                    <td>
+                        @if (httpAcc.HttpContext.Session.GetString(SD.SessionToken) != null &&
+                       httpAcc.HttpContext.Session.GetString(SD.SessionToken).ToString().Length > 0)
+                        {
+                            <a asp-controller="Subject" asp-action="UpdateSubject" asp-route-subjectId="@item.SubjectId" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+                            <a asp-controller="Subject" asp-action="DeleteSubject" asp-route-subjectId="@item.SubjectId" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+
+

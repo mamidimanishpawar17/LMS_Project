@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace LMS_WEB.Models.DTO
+namespace LMS_WEB.Models.DTO.Issue
 {
     public class IssueCreateDTO
     {
-     
+
         public int IssueId { get; set; }
         public DateTime IssueDate { get; set; }
         public DateTime? returnDate { get; set; }
@@ -13,9 +13,9 @@ namespace LMS_WEB.Models.DTO
         public bool FinePaid { get; set; }
 
         public int MemberId { get; set; }
- 
+
 
         public int BookId { get; set; }
-     
+
     }
 }

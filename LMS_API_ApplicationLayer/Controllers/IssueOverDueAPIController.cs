@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using LMS_API_BusinessLayer.Contracts;
 using LMS_API_DataLayer.Models;
-using LMS_API_DataLayer.Models.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +9,9 @@ using System.Net;
 using System.Text.Json;
 using LMS_API_DataLayer.Models.Issues;
 using Serilog;
-namespace BuildAPI.Controllers
+using LMS_API_DataLayer.Models.DTO.Issue;
+
+namespace LMS_API_ApplicationLayer.Controllers
 {
     [Route("api/IssueOverDueAPI")]
     [ApiController]
@@ -29,13 +30,13 @@ namespace BuildAPI.Controllers
 
 
         [HttpGet]
+        [ResponseCache(CacheProfileName = "Default30")]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status406NotAcceptable)]
-
-        [Authorize(Roles = "admin")]
-        public async Task<ActionResult<APIResponse>> GetIssueOverDues([FromQuery(Name = "filteravailability")] Boolean IsOverDue,
+        //[Authorize(Roles = "admin")]
+        public async Task<ActionResult<APIResponse>> GetIssueOverDues([FromQuery(Name = "filteravailability")] int Availability,
             [FromQuery] int pageSize = 0, int pageNumber = 1)
         {
             {
@@ -44,7 +45,7 @@ namespace BuildAPI.Controllers
 
                     IEnumerable<IssueOverDue> List;
 
-                    if (IsOverDue == true)
+                    if (Availability > 1)
                     {
                         List = await _dbIssueOverDue.GetAllAsync(pageSize: pageSize,
                             pageNumber: pageNumber);
@@ -68,7 +69,7 @@ namespace BuildAPI.Controllers
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex.Message,ex.StackTrace); _response.IsSuccess = false;
+                    Log.Error(ex.Message, ex.StackTrace); _response.IsSuccess = false;
                     _response.ErrorMessages
                          = new List<string>() { ex.ToString() };
                 }
@@ -107,7 +108,7 @@ namespace BuildAPI.Controllers
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message,ex.StackTrace); _response.IsSuccess = false;
+                Log.Error(ex.Message, ex.StackTrace); _response.IsSuccess = false;
                 _response.ErrorMessages
                      = new List<string>() { ex.ToString() };
             }
@@ -118,7 +119,7 @@ namespace BuildAPI.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public async Task<ActionResult<APIResponse>> CreateIssueOverDue([FromBody] IssueOverDueCreateDTO createDTO)
         {
             try
@@ -145,7 +146,7 @@ namespace BuildAPI.Controllers
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message,ex.StackTrace); _response.IsSuccess = false;
+                Log.Error(ex.Message, ex.StackTrace); _response.IsSuccess = false;
                 _response.ErrorMessages
                      = new List<string>() { ex.ToString() };
             }
@@ -158,7 +159,7 @@ namespace BuildAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpDelete("{id:int}", Name = "DeleteIssueOverDue")]
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public async Task<ActionResult<APIResponse>> DeleteIssueOverDue(int id)
         {
             try
@@ -173,14 +174,14 @@ namespace BuildAPI.Controllers
                     return NotFound();
                 }
 
-                await _dbIssueOverDue.UpdateAsync(IssueOverDue); // update record in the database
+                await _dbIssueOverDue.RemoveAsync(IssueOverDue); // update record in the database
                 _response.StatusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;
                 return Ok(_response);
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message,ex.StackTrace); _response.IsSuccess = false;
+                Log.Error(ex.Message, ex.StackTrace); _response.IsSuccess = false;
                 _response.ErrorMessages
                      = new List<string>() { ex.ToString() };
             }
@@ -190,7 +191,7 @@ namespace BuildAPI.Controllers
         [HttpPut("{id:int}", Name = "UpdateIssueOverDue")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public async Task<ActionResult<APIResponse>> UpdateIssueOverDue(int id, [FromBody] IssueOverDueUpdateDTO updateDTO)
         {
             try
@@ -209,7 +210,7 @@ namespace BuildAPI.Controllers
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message,ex.StackTrace); _response.IsSuccess = false;
+                Log.Error(ex.Message, ex.StackTrace); _response.IsSuccess = false;
                 _response.ErrorMessages
                      = new List<string>() { ex.ToString() };
             }
@@ -218,7 +219,7 @@ namespace BuildAPI.Controllers
 
 
 
-        
+
 
 
 

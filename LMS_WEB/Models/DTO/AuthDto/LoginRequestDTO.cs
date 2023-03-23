@@ -1,4 +1,4 @@
-﻿namespace LMS_WEB.Models.DTO
+﻿namespace LMS_WEB.Models.DTO.AuthDto
 {
     public class LoginRequestDTO
     {

@@ -15,11 +15,13 @@ namespace LMS_API_DataLayer.Models.Issues
     [Keyless]
     public class IssueOverDue
     {
-        [ForeignKey("Member")]
+        
         public int OverDueIssueNo { get; set; }
-        public Issue Issue { get; set; }
+        
         public DateTime IssueDate { get; set; }
-        [JsonIgnore]
+
+
+
         public DateTime? returnDate { get; set; } = null;
         public DateTime DueDate { get; set; }
         public int OverdueFine { get; set; }
@@ -27,7 +29,7 @@ namespace LMS_API_DataLayer.Models.Issues
 
         public int MemberId { get; set; }
       
-   
+        
         public int BookId { get; set; }
      
 

@@ -1,5 +1,4 @@
-﻿
-using LMS_WEB.Models.DTO;
+﻿using LMS_WEB.Models.DTO.Issue;
 
 namespace LMS_WEB.Services.IServices
 {
@@ -10,5 +9,6 @@ namespace LMS_WEB.Services.IServices
         Task<T> CreateAsync<T>(IssueCreateDTO dto, string token);
         Task<T> UpdateAsync<T>(IssueUpdateDTO dto, string token);
         Task<T> DeleteAsync<T>(int id, string token);
+        Task<T> SendReminder<T>(string token);
     }
 }

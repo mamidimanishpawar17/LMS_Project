@@ -103,7 +103,7 @@ namespace LMS_API_BusinessLayer.Repositories
                     if (!_roleManager.RoleExistsAsync("admin").GetAwaiter().GetResult())
                     {
                         await _roleManager.CreateAsync(new IdentityRole("admin"));
-                        await _roleManager.CreateAsync(new IdentityRole("visitor"));
+                        await _roleManager.CreateAsync(new IdentityRole("customer"));
                     }
                     await _userManager.AddToRoleAsync(user, "admin");
                     var userToReturn = _db.ApplicationUsers

@@ -1,0 +1,47 @@
+﻿@model LMS_WEB.Models.DTO.Subjects.SubjectDTO
+
+
+<form asp-action="DeleteSubject">
+    <br />
+    <div class="container border p-3">
+        <h1 class="text-primary">Delete Subject</h1>
+        <hr />
+
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="col-2">
+                <label asp-for="SubjectId" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+
+                <span asp-validation-for="SubjectId" disabled class="text-danger"></span>
+            </div>
+
+            <div class="col-2">
+                <label asp-for="Name" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+
+                <span asp-validation-for="Name" disabled class="text-danger"></span>
+            </div>
+
+
+
+
+            <div class="col-5 offset-2">
+                <a asp-action="IndexSubject" asp-controller="Subject" class="btn-primary btn form-control ">Back to List</a>
+            </div>
+            <div class="col-5">
+                <input type="submit" value="Delete" class="btn btn-success form-control" />
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

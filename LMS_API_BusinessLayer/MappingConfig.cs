@@ -1,8 +1,12 @@
 ﻿using AutoMapper;
 
 using LMS_API_DataLayer.Models.Books;
-using LMS_API_DataLayer.Models.DTO;
 using LMS_API_DataLayer.Models.DTO.AuthDto;
+using LMS_API_DataLayer.Models.DTO.Author;
+using LMS_API_DataLayer.Models.DTO.Book;
+using LMS_API_DataLayer.Models.DTO.Issue;
+using LMS_API_DataLayer.Models.DTO.Member;
+using LMS_API_DataLayer.Models.DTO.Subjects;
 using LMS_API_DataLayer.Models.Issues;
 using LMS_API_DataLayer.Models.Members;
 using LMS_API_DataLayer.Models.User;
@@ -42,6 +46,7 @@ namespace LMS_API_BusinessLayer
             CreateMap<Subject, SubjectDTO>().ReverseMap();
             CreateMap<Subject, SubjectCreateDTO>().ReverseMap();
             CreateMap<Subject, SubjectUpdateDTO>().ReverseMap();
+
             CreateMap<ApplicationUser, UserDTO>().ReverseMap();
         }
     }

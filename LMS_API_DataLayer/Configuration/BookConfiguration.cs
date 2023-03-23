@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 
-namespace DataLayer.Configuration
+namespace LMS_API_DataLayer.Configuration
 {
     public class BookConfiguration : IEntityTypeConfiguration<Book>
     {
@@ -12,7 +12,7 @@ namespace DataLayer.Configuration
             builder.ToTable("Books");
             builder.HasKey(b => b.BookId);
             builder.HasOne(i => i.Issue).WithOne(b => b.Book).HasForeignKey<Book>(b => b.BookId);
-         
+
         }
     }
 }

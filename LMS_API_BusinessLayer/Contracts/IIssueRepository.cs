@@ -13,9 +13,12 @@ namespace LMS_API_BusinessLayer.Contracts
     {
         
         Task<Issue> GetAsync(Expression<Func<Issue, bool>> filter = null, bool tracked = true, string includeProperties = null);
-        Task SendOverdueEmailsAsync();
+        //Task SendReminder();
+        Task<List<Issue>> GetOverdueIssues();
+        //Task SendReminder(IMessageSender messageSender, string recipient, string subject, string body);
         Task<Issue> UpdateAsync(Issue entity);
-        
+        Task<List<Issue>> GetAll();
+        Task<Issue> GetById(int id);
 
     }
   

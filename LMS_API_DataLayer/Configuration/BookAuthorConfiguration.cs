@@ -1,10 +1,9 @@
-﻿
-using LMS_API_DataLayer.Models.Books;
+﻿using LMS_API_DataLayer.Models.Books;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 
-namespace DataLayer.Configuration
+namespace LMS_API_DataLayer.Configuration
 {
     public class BookAuthorConfiguration : IEntityTypeConfiguration<BookAuthor>
     {

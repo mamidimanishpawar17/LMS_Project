@@ -3,14 +3,14 @@ using LMS_API_DataLayer.Models.Members;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
-namespace LMS_API_DataLayer.Models.DTO
+namespace LMS_API_DataLayer.Models.DTO.Member
 {
     [Index(nameof(UserName), IsUnique = true)]
     [Index(nameof(FirstName), IsUnique = true)]
     [Index(nameof(PhoneNumber), IsUnique = true)]
     public class MemberCreateDTO
     {
-       
+
         public int MemberId { get; set; }
         [Required]
         public string FirstName { get; set; }

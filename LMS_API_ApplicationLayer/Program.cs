@@ -1,11 +1,13 @@
 using LMS_API_BusinessLayer;
 using LMS_API_BusinessLayer.Contracts;
+using LMS_API_BusinessLayer.Messaging;
 using LMS_API_BusinessLayer.Repositories;
 using LMS_API_DataLayer.Data;
 using LMS_API_DataLayer.Models.User;
-using Messaging;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -28,7 +30,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(option => {
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-//builder.Services.AddScoped<ReminderService>();
+builder.Services.AddScoped<IReminderService, ReminderService>();
 //builder.Services.AddScoped<IMessageSender, EmailMessageSender>();
 //builder.Services.AddScoped<IMessageSender, SmsMessageSender>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -42,13 +44,18 @@ builder.Services.AddScoped<IIssueRepository, IssueRepository>();
 
 
 
-
-
-
-
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 
-
+//builder.Services.AddApiVersioning(options => {
+//    options.AssumeDefaultVersionWhenUnspecified = true;
+//    options.DefaultApiVersion = new ApiVersion(1, 0);
+//    options.ReportApiVersions = true;
+//});
+//builder.Services.AddVersionedApiExplorer(options =>
+//{
+//    options.GroupNameFormat = "'v'VVV";
+//    options.SubstituteApiVersionInUrl = true;
+//});
 
 
 var key = builder.Configuration.GetValue<string>("ApiSettings:Secret");
@@ -64,6 +71,7 @@ builder.Services.AddAuthentication(x =>
     {
         x.RequireHttpsMetadata = false;
         x.SaveToken = true;
+        //x.Authority = "https://localhost:7269/";
         x.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuerSigningKey = true,
@@ -82,7 +90,16 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
     options.JsonSerializerOptions.MaxDepth = 64;
 
-});
+
+}).AddNewtonsoftJson().AddXmlDataContractSerializerFormatters(); ;
+builder.Services.AddControllers(option => {
+    option.CacheProfiles.Add("Default30",
+       new CacheProfile()
+       {
+           Duration = 30
+       });
+    //option.ReturnHttpNotAcceptable=true;
+}).AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -115,13 +132,33 @@ builder.Services.AddSwaggerGen(options =>
             new List<string>()
         }
     });
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version= "v1",
+        Title = "Library V1",
+        Description = "API to manage Library",
+        TermsOfService = new Uri("https://example.com/terms"),
+        Contact = new OpenApiContact
+        {
+            Name = "MotivityLabs",
+            Url = new Uri("https://MotivityLabs.com")
+        },
+        License = new OpenApiLicense
+        {
+            Name = "Example License",
+            Url = new Uri("https://example.com/license")
+        }
+    });
 });
 // Add services to the container.
 
-builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors(p => p.AddPolicy("corspolicy", build => {
+    build.WithOrigins("http://localhost:3000").AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+}));
 
 var app = builder.Build();
 
@@ -131,8 +168,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors(
+  options => options.WithOrigins("*").AllowAnyMethod().AllowAnyHeader()
+      );
 app.UseHttpsRedirection();
+app.UseRouting();
+
 app.UseAuthentication();
 app.UseAuthorization();
 

@@ -34,9 +34,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Book" asp-action="IndexBook">Books</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Member" asp-action="IndexMember">Members</a>
-                        </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Authors" asp-action="IndexAuthor">Authors</a>
                         </li>
@@ -48,7 +46,10 @@
                         httpAcc.HttpContext.Session.GetString(SD.SessionToken).ToString().Length > 0)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-controller="Auth" asp-action="Logout">Logout</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Member" asp-action="IndexMember">Members</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-controller="Auth" asp-action="Logout">Logout @httpAcc.HttpContext.User.Identity.Name</a>
                             </li>
                         }
                         else
@@ -73,13 +74,14 @@
         </main>
     </div>
 
-    <footer class="footer text-muted">
-        <div class="">
+    <footer class="border-top footer text-muted">
+        <div class="container">
             &copy; 2023 - LMS_WEB - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="~/js/site.js" asp-append-version="true"></script>

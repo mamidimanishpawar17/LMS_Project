@@ -1,9 +1,12 @@
-﻿using LMS_API_BusinessLayer.Contracts;
+﻿using FluentEmail.Core;
+using LMS_API_BusinessLayer.Contracts;
 using LMS_API_DataLayer.Data;
 using LMS_API_DataLayer.Models.Books;
 using LMS_API_DataLayer.Models.Issues;
-using Messaging;
+using LMS_API_DataLayer.Strings;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +14,7 @@ using System.Linq.Expressions;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using Twilio.Exceptions;
 
 namespace LMS_API_BusinessLayer.Repositories
 {
@@ -18,7 +22,8 @@ namespace LMS_API_BusinessLayer.Repositories
     public class IssueRepository : Repository<Issue>, IIssueRepository
     {
         private readonly ApplicationDbContext _db;
-        private readonly EmailMessageSender _messageSender;
+        private readonly IIssueRepository _issueRepository;
+        private readonly IConfiguration _configuration;
         public IssueRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
@@ -70,23 +75,62 @@ namespace LMS_API_BusinessLayer.Repositories
             }
         }
 
-
-        public async Task SendOverdueEmailsAsync()
+        public async Task<List<Issue>> GetOverdueIssues()
         {
-            var overdueBooks = await _db.Issues
-                .Include(b => b.Member)
-                .Where(b => b.returnDate == null && b.DueDate < DateTime.Now)
-                .ToListAsync();
-
-            foreach (var book in overdueBooks)
+            try
             {
-                var toEmailAddress = book.Member.Email;
-                var subject = "Overdue Book Notification";
-                var body = $"Dear {book.Member.FirstName},<br><br>Your book '{book.Book}' is overdue. Please return it as soon as possible.<br><br>Thank you.";
+                return await _db.Issues
+                       .Include(issue => issue.Member)
+                       .Where(issue => issue.returnDate == null && issue.DueDate < DateTime.Now)
+                       .ToListAsync();
+            }
+            catch (Exception e)
+            {
 
-                await _messageSender.SendAsync(toEmailAddress, subject, body);
+                throw new ArgumentException(e.Message);
             }
         }
+        public async Task<List<Issue>> GetAll()
+        {
+            try
+            {
+                return await _db.Issues.FromSqlRaw<Issue>(ApiStrings.getIssues).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message, $"Error getting entity ");
+                throw new ArgumentException(ex.Message);
+            }
+        }
+        public async Task<Issue> GetById(int id)
+        {
+
+
+            var transaction = await _db.Database.BeginTransactionAsync();
+            try
+            {
+                var data = _db.Issues.FirstOrDefault(c => c.IssueId == id);
+                if (data == null)
+                {
+
+                    throw new ApiException("Data Not Found");
+
+                }
+                return data;
+
+            }
+            catch (ApiException e)
+            {
+                transaction.Commit();
+
+                throw new ApiException(e.Message);
+            }
+            finally
+            {
+                _db.Dispose();
+            }
+        }
+
 
     }
 }

@@ -9,9 +9,9 @@ using System.Net;
 namespace LMS_API_ApplicationLayer.Controllers
 {
 
-    [ApiController]
     [Route("api/UsersAuth")]
-
+    [ApiController]
+    
     public class UsersController : Controller
     {
         private readonly IUserRepository _userRepo;

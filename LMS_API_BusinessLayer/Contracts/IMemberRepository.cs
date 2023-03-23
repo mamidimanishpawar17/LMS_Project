@@ -12,6 +12,8 @@ namespace LMS_API_BusinessLayer.Contracts
     {
 
         Task<Member> UpdateAsync(Member entity);
+        Task<List<Member>> GetAll();
+        Task<Member> GetById(int id);
 
     }
   

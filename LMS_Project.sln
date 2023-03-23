@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LMS_Utility", "LMS_Utility\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LMS_WEB", "LMS_WEB\LMS_WEB.csproj", "{BFC43E27-F780-4B6B-9A35-2BD9A38DB55B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingLMS_API", "TestingLMS_API\TestingLMS_API.csproj", "{75AE92A5-7515-43B9-BE87-1A3B4A49DCAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingLMS_WEB", "TestingLMS_WEB\TestingLMS_WEB.csproj", "{39AAE8A6-9943-419D-B738-462175CDF0C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{BFC43E27-F780-4B6B-9A35-2BD9A38DB55B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFC43E27-F780-4B6B-9A35-2BD9A38DB55B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFC43E27-F780-4B6B-9A35-2BD9A38DB55B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75AE92A5-7515-43B9-BE87-1A3B4A49DCAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75AE92A5-7515-43B9-BE87-1A3B4A49DCAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75AE92A5-7515-43B9-BE87-1A3B4A49DCAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75AE92A5-7515-43B9-BE87-1A3B4A49DCAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39AAE8A6-9943-419D-B738-462175CDF0C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39AAE8A6-9943-419D-B738-462175CDF0C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39AAE8A6-9943-419D-B738-462175CDF0C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39AAE8A6-9943-419D-B738-462175CDF0C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

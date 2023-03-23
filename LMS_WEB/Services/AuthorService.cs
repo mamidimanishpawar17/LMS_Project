@@ -2,7 +2,7 @@
 
 using LMS_Utility;
 using LMS_WEB.Models;
-using LMS_WEB.Models.DTO;
+using LMS_WEB.Models.DTO.Author;
 using LMS_WEB.Services.IServices;
 using Serilog;
 
@@ -30,7 +30,7 @@ namespace LMS_WEB.Services
                     Data = dto,
                     Url = lmsUrl + "/api/AuthorAPI",
                     Token = token
-                });
+                },"AuthorAPI");
             }
             catch (Exception e)
             {
@@ -48,7 +48,7 @@ namespace LMS_WEB.Services
                     ApiType = SD.ApiType.DELETE,
                     Url = lmsUrl + "/api/AuthorAPI/" + id,
                     Token = token
-                });
+                },"AuthorAPI");
             }
             catch (Exception e)
             {
@@ -65,7 +65,7 @@ namespace LMS_WEB.Services
                 ApiType = SD.ApiType.GET,
                 Url = lmsUrl + "/api/AuthorAPI",
                 Token = token
-            });
+            }, "AuthorAPI");
         }
 
         public Task<T> GetAsync<T>(int id, string token)
@@ -75,7 +75,7 @@ namespace LMS_WEB.Services
                 ApiType = SD.ApiType.GET,
                 Url = lmsUrl + "/api/AuthorAPI/" + id,
                 Token = token
-            });
+            }, "AuthorAPI");
         }
 
         public Task<T> UpdateAsync<T>(AuthorDTO dto, string token)
@@ -86,7 +86,7 @@ namespace LMS_WEB.Services
                 Data = dto,
                 Url = lmsUrl + "/api/AuthorAPI/" + dto.AuthorId,
                 Token = token
-            });
+            }, "AuthorAPI");
         }
     }
 }

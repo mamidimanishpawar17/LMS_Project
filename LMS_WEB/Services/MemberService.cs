@@ -2,7 +2,7 @@
 
 using LMS_Utility;
 using LMS_WEB.Models;
-using LMS_WEB.Models.DTO;
+using LMS_WEB.Models.DTO.Member;
 using LMS_WEB.Services.IServices;
 
 namespace LMS_WEB.Services
@@ -27,7 +27,7 @@ namespace LMS_WEB.Services
                 Data = dto,
                 Url = lmsUrl + "/api/MemberAPI",
                 Token = token
-            });
+            }, "MemberAPI");
         }
 
         public Task<T> DeleteAsync<T>(int id, string token)
@@ -37,7 +37,7 @@ namespace LMS_WEB.Services
                 ApiType = SD.ApiType.DELETE,
                 Url = lmsUrl + "/api/MemberAPI/" + id,
                 Token = token
-            });
+            }, "MemberAPI");
         }
 
         public Task<T> GetAllAsync<T>(string token)
@@ -47,7 +47,7 @@ namespace LMS_WEB.Services
                 ApiType = SD.ApiType.GET,
                 Url = lmsUrl + "/api/MemberAPI",
                 Token = token
-            });
+            }, "MemberAPI");
         }
 
         public Task<T> GetAsync<T>(int id, string token)
@@ -57,7 +57,7 @@ namespace LMS_WEB.Services
                 ApiType = SD.ApiType.GET,
                 Url = lmsUrl + "/api/MemberAPI/" + id,
                 Token = token
-            });
+            }, "MemberAPI");
         }
 
         public Task<T> UpdateAsync<T>(MemberUpdateDTO dto, string token)
@@ -68,7 +68,7 @@ namespace LMS_WEB.Services
                 Data = dto,
                 Url = lmsUrl + "/api/MemberAPI/" + dto.MemberId,
                 Token = token
-            });
+            }, "MemberAPI");
         }
     }
 }

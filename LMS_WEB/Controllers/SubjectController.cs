@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using LMS_WEB.Models;
-using LMS_WEB.Models.DTO;
 using LMS_WEB.Services.IServices;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -9,6 +8,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Reflection;
 using Serilog;
+using LMS_WEB.Models.DTO.Subjects;
 
 namespace LMS_WEB.Controllers
 {
@@ -26,6 +26,7 @@ namespace LMS_WEB.Controllers
         {
             try
             {
+                Log.Information($"Running the IndexSubject");
                 List<SubjectDTO> list = new();
 
                 var response = await _SubjectService.GetAllAsync<APIResponse>(await HttpContext.GetTokenAsync("access_token"));
@@ -53,6 +54,7 @@ namespace LMS_WEB.Controllers
         {
             try
             {
+                Log.Information($"Running the CreateSubject");
                 if (ModelState.IsValid)
                 {
 
@@ -99,6 +101,7 @@ namespace LMS_WEB.Controllers
         {
             try
             {
+                Log.Information($"Running the UpdateSubject");
                 if (ModelState.IsValid)
                 {
                     TempData["success"] = "Subject updated successfully";
@@ -143,7 +146,7 @@ namespace LMS_WEB.Controllers
         {
             try
             {
-
+                Log.Information($"Running the DeleteSubject");
                 var response = await _SubjectService.DeleteAsync<APIResponse>(model.SubjectId, await HttpContext.GetTokenAsync("access_token"));
                 if (response != null && response.IsSuccess)
                 {

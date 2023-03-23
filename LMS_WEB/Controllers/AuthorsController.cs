@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using LMS_Utility;
 using LMS_WEB.Models;
-using LMS_WEB.Models.DTO;
+using LMS_WEB.Models.DTO.Author;
 using LMS_WEB.Services.IServices;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -11,7 +11,7 @@ using Serilog;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace FullMVC_Web.Controllers
+namespace LMS_WEB.Controllers
 {
     public class AuthorsController : Controller
     {
@@ -27,6 +27,7 @@ namespace FullMVC_Web.Controllers
         {
             try
             {
+                Log.Information($"Running the IndexAuthor");
                 List<AuthorDTO> list = new();
 
                 var response = await _AuthorService.GetAllAsync<APIResponse>(await HttpContext.GetTokenAsync("access_token"));
@@ -54,6 +55,7 @@ namespace FullMVC_Web.Controllers
         {
             try
             {
+                Log.Information($"Running the CreateAuthor");
                 if (ModelState.IsValid)
                 {
 
@@ -100,6 +102,7 @@ namespace FullMVC_Web.Controllers
         {
             try
             {
+                Log.Information($"Running the UpdateAuthor");
                 if (ModelState.IsValid)
                 {
                     TempData["success"] = "Author updated successfully";
@@ -123,6 +126,7 @@ namespace FullMVC_Web.Controllers
         {
             try
             {
+
                 var response = await _AuthorService.GetAsync<APIResponse>(AuthorId, HttpContext.Session.GetString(SD.SessionToken));
                 if (response != null && response.IsSuccess)
                 {
@@ -145,6 +149,7 @@ namespace FullMVC_Web.Controllers
 
             try
             {
+                Log.Information($"Running the DeleteAuthor");
                 var response = await _AuthorService.DeleteAsync<APIResponse>(model.AuthorId, HttpContext.Session.GetString(SD.SessionToken));
                 if (response != null && response.IsSuccess)
                 {

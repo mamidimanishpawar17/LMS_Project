@@ -1,0 +1,87 @@
+﻿
+@model IEnumerable<LMS_WEB.Models.DTO.Member.MemberDTO>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpAcc
+@using LMS_Utility;
+
+<br />
+<div class="container p-4 border">
+    <div class="row pb-2">
+        <div class="col">
+            <h1 class="text-primary">Member List</h1>
+        </div>
+
+        @if (httpAcc.HttpContext.Session.GetString(SD.SessionToken) != null &&
+        httpAcc.HttpContext.Session.GetString(SD.SessionToken).ToString().Length > 0)
+        {
+            <div class="col text-end pt-1">
+                <a asp-controller="Member" asp-action="CreateMember" class="btn btn-outline-primary"><i class="bi bi-plus-square-fill"></i> Create New Issue</a>
+            </div>
+        }
+
+
+
+
+
+
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    MemberId
+                </th>
+                <th>
+                    FirstName
+                </th>
+
+                <th>
+                    UserName
+                </th>
+                <th>
+                    PhoneNumber
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Fine
+                </th>
+
+
+
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.MemberId</td>
+                    <td>@item.FirstName</td>
+                    <td>@item.UserName</td>
+                    <td>@item.PhoneNumber</td>
+                    <td>@item.Email</td>
+                    <td>@item.Fine</td>
+
+
+
+
+                    <td>
+                        @if (httpAcc.HttpContext.Session.GetString(SD.SessionToken) != null &&
+                       httpAcc.HttpContext.Session.GetString(SD.SessionToken).ToString().Length > 0)
+                        {
+                            <a asp-controller="Member" asp-action="UpdateMember" asp-route-memberId="@item.MemberId" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+                            <a asp-controller="Member" asp-action="DeleteMember" asp-route-memberId="@item.MemberId" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+
+

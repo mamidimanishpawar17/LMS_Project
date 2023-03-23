@@ -1,4 +1,5 @@
-﻿using LMS_API_DataLayer.Models.Books;
+﻿using FluentEmail.Core;
+using LMS_API_DataLayer.Models.Books;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace LMS_API_BusinessLayer.Contracts
     {
 
         Task<Author> UpdateAsync(Author entity);
+        Task<List<Author>> GetAll();
+        Task<Author> GetById(int id);
 
     }
 }

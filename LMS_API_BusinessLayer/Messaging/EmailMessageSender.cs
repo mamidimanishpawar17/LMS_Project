@@ -8,7 +8,7 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 
-namespace Messaging
+namespace LMS_API_BusinessLayer.Messaging
 {
 
     public class EmailMessageSender : IMessageSender
@@ -18,7 +18,7 @@ namespace Messaging
 
         public EmailMessageSender(string smtpServer, int smtpPort, string smtpUsername, string smtpPassword, string fromEmail)
         {
-            
+
             _fromEmail = fromEmail;
 
             _smtpClient = new SmtpClient(smtpServer, smtpPort)

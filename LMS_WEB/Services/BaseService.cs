@@ -16,11 +16,11 @@ namespace LMS_WEB.Services
             responseModel = new();
             this.httpClient = httpClient;
         }
-        public async Task<T> SendAsync<T>(APIRequest apiRequest)
+        public async Task<T> SendAsync<T>(APIRequest apiRequest,string serviceName)
         {
             try
             {
-                var client = httpClient.CreateClient("LMSAPI");
+                var _client = httpClient.CreateClient(serviceName);
                 HttpRequestMessage message = new HttpRequestMessage();
                 message.Headers.Add("Accept", "application/json");
                 message.RequestUri = new Uri(apiRequest.Url);
@@ -50,10 +50,10 @@ namespace LMS_WEB.Services
 
                 if (!string.IsNullOrEmpty(apiRequest.Token))
                 {
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiRequest.Token);
+                    _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiRequest.Token);
                 }
 
-                apiResponse = await client.SendAsync(message);
+                apiResponse = await _client.SendAsync(message);
 
                 var apiContent = await apiResponse.Content.ReadAsStringAsync();
                 try

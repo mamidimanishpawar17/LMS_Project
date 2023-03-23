@@ -1,0 +1,81 @@
+﻿@model IEnumerable<LMS_WEB.Models.DTO.Issue.IssueDTO>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpAcc
+@using LMS_Utility;
+<br />
+<div class="container p-4 border">
+    <div class="row pb-2">
+        <div class="col">
+            <h1 class="text-primary">Issue List</h1>
+        </div>
+        <div class="col text-end pt-1">
+            <a asp-controller="Issue" asp-action="CreateIssue" class="btn btn-outline-primary"><i class="bi bi-plus-square-fill"></i> Create New Issue</a>
+            @if (httpAcc.HttpContext.Session.GetString(SD.SessionToken) != null &&
+            httpAcc.HttpContext.Session.GetString(SD.SessionToken).ToString().Length > 0)
+            {
+                <a asp-controller="Issue" asp-action="SendReminder" class="btn btn-success"><i class="bi bi-plus-square"></i>Send Reminders</a>
+            }
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    IssueId
+                </th>
+                <th>
+                    IssueDate
+                </th>
+                <th>
+                    DueDate
+                </th>
+                <th>
+                    OverDueFine
+                </th>
+                <th>
+                    FinePaid
+                </th>
+                <th>
+                    MemberId
+                </th>
+                <th>
+                    BookId
+                </th>
+
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.IssueId</td>
+                    <td>@item.IssueDate</td>
+                    <td>@item.DueDate</td>
+                    <td>@item.OverdueFine</td>
+                    <td>@item.FinePaid</td>
+                    <td>@item.MemberId</td>
+                    <td>@item.BookId</td>
+
+
+
+                    <td>
+                        @if (httpAcc.HttpContext.Session.GetString(SD.SessionToken) != null &&
+                       httpAcc.HttpContext.Session.GetString(SD.SessionToken).ToString().Length > 0)
+                        {
+                            <a asp-controller="Issue" asp-action="UpdateIssue" asp-route-issueId="@item.IssueId" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+                            <a asp-controller="Issue" asp-action="DeleteIssue" asp-route-issueId="@item.IssueId" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+                        }
+
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+
+

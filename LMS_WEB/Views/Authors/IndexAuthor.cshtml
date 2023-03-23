@@ -1,42 +1,58 @@
-﻿@model IEnumerable<LMS_WEB.Models.DTO.AuthorDTO>
+﻿@model IEnumerable<LMS_WEB.Models.DTO.Author.AuthorDTO>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpAcc
+@using LMS_Utility;
 
-@{
-    ViewData["Title"] = "IndexAuthor";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+<br />
+<div class="container p-4 border">
+    <div class="row pb-2">
+        <div class="col">
+            <h1 class="text-primary">Author List</h1>
+        </div>
+        <div class="col text-end pt-1">
+            @if (httpAcc.HttpContext.Session.GetString(SD.SessionToken) != null &&
+            httpAcc.HttpContext.Session.GetString(SD.SessionToken).ToString().Length > 0)
+            {
+                <a asp-controller="Authors" asp-action="CreateAuthor" class="btn btn-outline-primary"><i class="bi bi-plus-square-fill"></i> Create New Author</a>
+            }
+        </div>
+    </div>
 
-<h1>IndexAuthor</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    AuthorId
+                </th>
+                <th>
+                    Name
+                </th>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.AuthorId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AuthorId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.AuthorId</td>
+                    <td>@item.Name</td>
+
+
+
+                    <td>
+                        @if (httpAcc.HttpContext.Session.GetString(SD.SessionToken) != null &&
+                       httpAcc.HttpContext.Session.GetString(SD.SessionToken).ToString().Length > 0)
+                        {
+                            <a asp-controller="Authors" asp-action="UpdateAuthor" asp-route-authorId="@item.AuthorId" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+                            <a asp-controller="Authors" asp-action="DeleteAuthor" asp-route-authorId="@item.AuthorId" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+
+

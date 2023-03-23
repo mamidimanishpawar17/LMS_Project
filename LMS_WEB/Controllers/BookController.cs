@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using LMS_WEB.Models;
-using LMS_WEB.Models.DTO;
+using LMS_WEB.Models.DTO.Book;
 using LMS_WEB.Services.IServices;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -26,6 +26,7 @@ namespace LMS_WEB.Controllers
         {
             try
             {
+                Log.Information($"Running the IndexBook");
                 List<BookDTO> list = new();
 
                 var response = await _BookService.GetAllAsync<APIResponse>(await HttpContext.GetTokenAsync("access_token"));
@@ -53,6 +54,7 @@ namespace LMS_WEB.Controllers
         {
             try
             {
+                Log.Information($"Running the CreateBook");
                 if (ModelState.IsValid)
                 {
 
@@ -81,7 +83,7 @@ namespace LMS_WEB.Controllers
                 if (response != null && response.IsSuccess)
                 {
 
-                    BookDTO model = JsonConvert.DeserializeObject<BookDTO>(Convert.ToString(response.Result));
+                    BookUpdateDTO model = JsonConvert.DeserializeObject<BookUpdateDTO>(Convert.ToString(response.Result));
                     return View(_mapper.Map<BookUpdateDTO>(model));
                 }
                 return NotFound();
@@ -99,6 +101,7 @@ namespace LMS_WEB.Controllers
         {
             try
             {
+                Log.Information($"Running the UpdateBook");
                 if (ModelState.IsValid)
                 {
                     TempData["success"] = "Book updated successfully";
@@ -144,6 +147,7 @@ namespace LMS_WEB.Controllers
 
             try
             {
+                Log.Information($"Running the DeleteBook");
                 var response = await _BookService.DeleteAsync<APIResponse>(model.BookId, await HttpContext.GetTokenAsync("access_token"));
                 if (response != null && response.IsSuccess)
                 {

@@ -1,11 +1,10 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace LMS_WEB.Models.DTO
+namespace LMS_WEB.Models.DTO.Book
 {
-   
+
     public class BookCreateDTO
     {
 
@@ -23,6 +22,6 @@ namespace LMS_WEB.Models.DTO
 
         [MaxLength(10, ErrorMessage = "Enter the value below 10")]
         public int MaxIssueDays { get; set; }
-        
+
     }
 }

@@ -1,5 +1,9 @@
 ﻿using AutoMapper;
-using LMS_WEB.Models.DTO;
+using LMS_WEB.Models.DTO.Author;
+using LMS_WEB.Models.DTO.Book;
+using LMS_WEB.Models.DTO.Issue;
+using LMS_WEB.Models.DTO.Member;
+using LMS_WEB.Models.DTO.Subjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;

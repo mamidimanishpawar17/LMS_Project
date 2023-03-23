@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
-namespace LMS_WEB.Models.DTO
+
+namespace LMS_WEB.Models.DTO.Issue
 {
     public class IssueUpdateDTO
     {

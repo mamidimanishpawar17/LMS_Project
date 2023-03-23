@@ -3,7 +3,7 @@ using LMS_API_DataLayer.Models.Members;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace LMS_API_DataLayer.Models.DTO
+namespace LMS_API_DataLayer.Models.DTO.Issue
 {
     public class IssueOverDueUpdateDTO
     {

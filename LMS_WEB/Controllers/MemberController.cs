@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using LMS_WEB.Models;
-using LMS_WEB.Models.DTO;
 using LMS_WEB.Services.IServices;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -9,6 +8,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Reflection;
 using Serilog;
+using LMS_WEB.Models.DTO.Member;
 
 namespace LMS_WEB.Controllers
 {
@@ -26,6 +26,7 @@ namespace LMS_WEB.Controllers
         {
             try
             {
+                Log.Information($"Running the IndexMember");
                 List<MemberDTO> list = new();
 
                 var response = await _MemberService.GetAllAsync<APIResponse>(await HttpContext.GetTokenAsync("access_token"));
@@ -53,6 +54,7 @@ namespace LMS_WEB.Controllers
         {
             try
             {
+                Log.Information($"Running the CreateMember");
                 if (ModelState.IsValid)
                 {
 
@@ -77,6 +79,7 @@ namespace LMS_WEB.Controllers
 {
             try
             {
+                Log.Information($"Running the UpdateMember");
                 var response = await _MemberService.GetAsync<APIResponse>(MemberId, await HttpContext.GetTokenAsync("access_token"));
                 if (response != null && response.IsSuccess)
                 {
@@ -122,6 +125,7 @@ namespace LMS_WEB.Controllers
         {
             try
             {
+                Log.Information($"Running the DeleteMember");
                 var response = await _MemberService.GetAsync<APIResponse>(MemberId, await HttpContext.GetTokenAsync("access_token"));
                 if (response != null && response.IsSuccess)
                 {

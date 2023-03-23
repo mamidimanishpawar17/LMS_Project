@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
-namespace LMS_WEB.Models.DTO
+namespace LMS_WEB.Models.DTO.Author
 {
-   
+
 
     public class AuthorDTO
     {
@@ -12,6 +12,6 @@ namespace LMS_WEB.Models.DTO
 
         public string Name { get; set; }
 
-       
+
     }
 }

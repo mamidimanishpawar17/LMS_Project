@@ -13,6 +13,6 @@ namespace LMS_API_BusinessLayer.Contracts
 
         Task<IssueOverDue> UpdateAsync(IssueOverDue entity);
         Task<List<IssueOverDue>> GetOverdueIssues();
-
+        
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace LMS_API_DataLayer.Models.DTO
+namespace LMS_API_DataLayer.Models.DTO.Author
 {
     [Index(nameof(Name), IsUnique = true)]
 
@@ -11,6 +11,6 @@ namespace LMS_API_DataLayer.Models.DTO
 
         public string Name { get; set; }
 
-        
+
     }
 }

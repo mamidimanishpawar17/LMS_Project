@@ -1,5 +1,4 @@
-﻿
-using LMS_WEB.Models.DTO;
+﻿using LMS_WEB.Models.DTO.Subjects;
 
 namespace LMS_WEB.Services.IServices
 {

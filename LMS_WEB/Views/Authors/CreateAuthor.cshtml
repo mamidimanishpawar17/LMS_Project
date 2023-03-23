@@ -1,38 +1,45 @@
-﻿@model LMS_WEB.Models.DTO.AuthorCreateDTO
+﻿@model LMS_WEB.Models.DTO.Author.AuthorCreateDTO
 
-@{
-    ViewData["Title"] = "CreateAuthor";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
-<h1>CreateAuthor</h1>
+<form asp-action="CreateAuthor">
+    <br />
+    <div class="container border p-3">
+        <h1 class="text-primary">Create Author</h1>
+        <hr />
 
-<h4>AuthorCreateDTO</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateAuthor">
+        <div class="row">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="AuthorId" class="control-label"></label>
+
+            <div class="col-2">
+                <label asp-for="AuthorId" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
                 <input asp-for="AuthorId" class="form-control" />
                 <span asp-validation-for="AuthorId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+
+            <div class="col-2">
+                <label asp-for="Name" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+            
+     
+            <div class="col-5 offset-2">
+                <a asp-action="IndexAuthor" asp-controller="Authors" class="btn-primary btn form-control ">Back to List</a>
+            </div>
+            <div class="col-5">
+                <input type="submit" value="Create" class="btn btn-success form-control" />
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

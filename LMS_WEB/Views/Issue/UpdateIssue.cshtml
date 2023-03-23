@@ -1,0 +1,83 @@
+﻿@model             LMS_WEB.Models.DTO.Issue.IssueUpdateDTO
+
+
+
+
+<form asp-action="UpdateIssue">
+    <br />
+    <div class="container border p-3">
+        <h1 class="text-primary">Update Issue</h1>
+        <hr />
+        <input hidden asp-for="IssueId" />
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="col-2">
+                <label asp-for="IssueDate" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="IssueDate" class="form-control" />
+                <span asp-validation-for="IssueDate" class="text-danger"></span>
+            </div>
+            <div class="col-2">
+                <label asp-for="returnDate" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="returnDate" class="form-control" />
+                <span asp-validation-for="returnDate" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="col-2">
+                <label asp-for="DueDate" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="DueDate" class="form-control" />
+                <span asp-validation-for="DueDate" class="text-danger"></span>
+            </div>
+
+            <div class="col-2">
+                <label asp-for="OverdueFine" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="OverdueFine" class="form-control" />
+                <span asp-validation-for="OverdueFine" class="text-danger"></span>
+            </div>
+
+            <div class="col-2">
+                <label asp-for="FinePaid" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="FinePaid" class="form-control" />
+                <span asp-validation-for="FinePaid" class="text-danger"></span>
+            </div>
+
+            <div class="col-2">
+                <label asp-for="MemberId" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="MemberId" class="form-control" />
+                <span asp-validation-for="MemberId" class="text-danger"></span>
+            </div>
+
+            <div class="col-2">
+                <label asp-for="BookId" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="BookId" class="form-control" />
+                <span asp-validation-for="BookId" class="text-danger"></span>
+            </div>
+            <div class="col-5 offset-2">
+                <a asp-action="IndexIssue" asp-controller="Issue" class="btn-primary btn form-control ">Back to List</a>
+            </div>
+            <div class="col-5">
+                <input type="submit" value="Update" class="btn btn-success form-control" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -2,7 +2,7 @@
 
 using LMS_Utility;
 using LMS_WEB.Models;
-using LMS_WEB.Models.DTO;
+using LMS_WEB.Models.DTO.AuthDto;
 using LMS_WEB.Services.IServices;
 
 namespace LMS_WEB.Services
@@ -26,7 +26,7 @@ namespace LMS_WEB.Services
                 ApiType = SD.ApiType.POST,
                 Data = obj,
                 Url = lmsUrl + "/api/UsersAuth/login"
-            });
+            },"UsersAuth");
         }
 
         public Task<T> RegisterAsync<T>(RegisterationRequestDTO obj)
@@ -36,7 +36,7 @@ namespace LMS_WEB.Services
                 ApiType = SD.ApiType.POST,
                 Data = obj,
                 Url = lmsUrl + "/api/UsersAuth/register"
-            });
+            },"UsersAuth");
         }
     }
 }

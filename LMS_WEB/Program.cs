@@ -36,12 +36,11 @@ builder.Services.AddScoped<IIssueOverDueService, IssueOverDueService>();
 
 builder.Services.AddHttpClient<IIssueService, IssueService>();
 builder.Services.AddScoped<IIssueService, IssueService>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-
-
+builder.Services.AddDistributedMemoryCache();
 builder.Services.AddHttpClient<IAuthService, AuthService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddAuthentication
     (CookieAuthenticationDefaults.AuthenticationScheme)
@@ -74,9 +73,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseSession();
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

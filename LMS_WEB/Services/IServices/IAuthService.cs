@@ -1,6 +1,4 @@
-﻿
-
-using LMS_WEB.Models.DTO;
+﻿using LMS_WEB.Models.DTO.AuthDto;
 
 namespace LMS_WEB.Services.IServices
 {

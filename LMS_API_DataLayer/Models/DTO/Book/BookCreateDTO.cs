@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace LMS_API_DataLayer.Models.DTO
+namespace LMS_API_DataLayer.Models.DTO.Book
 {
     [Index(nameof(ISBN), IsUnique = true)]
     public class BookCreateDTO
@@ -23,6 +23,6 @@ namespace LMS_API_DataLayer.Models.DTO
 
         [MaxLength(10, ErrorMessage = "Enter the value below 10")]
         public int MaxIssueDays { get; set; }
-        
+
     }
 }

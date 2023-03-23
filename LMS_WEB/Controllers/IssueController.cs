@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using LMS_WEB.Models;
-using LMS_WEB.Models.DTO;
+using LMS_WEB.Models.DTO.Issue;
 using LMS_WEB.Services.IServices;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -26,6 +26,7 @@ namespace LMS_WEB.Controllers
         {
             try
             {
+                Log.Information($"Running the IndexIssue");
                 List<IssueDTO> list = new();
 
                 var response = await _IssueService.GetAllAsync<APIResponse>(await HttpContext.GetTokenAsync("access_token"));
@@ -41,7 +42,7 @@ namespace LMS_WEB.Controllers
                 Log.Error(e.Message, e.StackTrace); throw new ArgumentException(e.Message);
             }
         }
-        [Authorize(Roles ="admin")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> CreateIssue()
         {
             return View();
@@ -53,6 +54,7 @@ namespace LMS_WEB.Controllers
         {
             try
             {
+                Log.Information($"Running the CreateIssue");
                 if (ModelState.IsValid)
                 {
 
@@ -74,7 +76,7 @@ namespace LMS_WEB.Controllers
         }
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> UpdateIssue(int IssueId)
-{
+        {
             try
             {
                 var response = await _IssueService.GetAsync<APIResponse>(IssueId, await HttpContext.GetTokenAsync("access_token"));
@@ -99,6 +101,7 @@ namespace LMS_WEB.Controllers
         {
             try
             {
+                Log.Information($"Running the UpdateIssue");
                 if (ModelState.IsValid)
                 {
                     TempData["success"] = "Issue updated successfully";
@@ -137,6 +140,7 @@ namespace LMS_WEB.Controllers
             }
         }
         [Authorize(Roles = "admin")]
+        //[HttpDelete]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteIssue(IssueDTO model)
@@ -144,6 +148,7 @@ namespace LMS_WEB.Controllers
 
             try
             {
+                Log.Information($"Running the DeleteIssue");
                 var response = await _IssueService.DeleteAsync<APIResponse>(model.IssueId, await HttpContext.GetTokenAsync("access_token"));
                 if (response != null && response.IsSuccess)
                 {
@@ -160,5 +165,30 @@ namespace LMS_WEB.Controllers
             }
         }
 
+
+        [Authorize(Roles = "admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SendReminder()
+        {
+            try
+            {
+
+
+                var response = await _IssueService.SendReminder<APIResponse>(await HttpContext.GetTokenAsync("access_token"));
+                if (response != null && response.IsSuccess)
+                {
+                    TempData["success"] = "Reminder sent successfully";
+                    return RedirectToAction(nameof(IndexIssue));
+                }
+
+                TempData["error"] = "Error encountered.";
+                return View();
+            }
+            catch (Exception e)
+            {
+
+                Log.Error(e.Message, e.StackTrace); throw new ArgumentException(e.Message);
+            }
+        }
     }
 }

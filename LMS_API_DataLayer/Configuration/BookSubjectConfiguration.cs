@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 
-namespace DataLayer.Configuration
+namespace LMS_API_DataLayer.Configuration
 {
     public class BookSubjectConfiguration : IEntityTypeConfiguration<BookSubject>
     {

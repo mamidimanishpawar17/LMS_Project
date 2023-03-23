@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
-namespace LMS_WEB.Models.DTO
+namespace LMS_WEB.Models.DTO.Subjects
 {
     [Index(nameof(Name), IsUnique = true)]
     public class SubjectUpdateDTO
     {
-       
+
         public int SubjectId { get; set; }
         public string Name { get; set; }
 

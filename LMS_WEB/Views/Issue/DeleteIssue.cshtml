@@ -1,0 +1,82 @@
+﻿@model LMS_WEB.Models.DTO.Issue.IssueDTO
+
+
+<form asp-action="DeleteIssue">
+    <br />
+    <div class="container border p-3">
+        <h1 class="text-primary">Delete Issue</h1>
+        <hr />
+
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="col-2">
+                <label asp-for="IssueId" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+
+                <span asp-validation-for="IssueId" disabled class="text-danger"></span>
+            </div>
+
+            <div class="col-2">
+                <label asp-for="IssueDate" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+
+                <span asp-validation-for="IssueDate" disabled class="text-danger"></span>
+            </div>
+
+            <div class="col-2">
+                <label asp-for="DueDate" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <span asp-validation-for="DueDate" disabled class="text-danger"></span>
+            </div>
+
+            <div class="col-2">
+                <label asp-for="OverdueFine" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <span asp-validation-for="OverdueFine" disabled class="text-danger"></span>
+            </div>
+
+            <div class="col-2">
+                <label asp-for="FinePaid" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <span asp-validation-for="FinePaid" disabled class="text-danger"></span>
+            </div>
+
+            <div class="col-2">
+                <label asp-for="MemberId" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <span asp-validation-for="MemberId" disabled class="text-danger"></span>
+            </div>
+
+            <div class="col-2">
+                <label asp-for="BookId" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <span asp-validation-for="BookId" disabled class="text-danger"></span>
+            </div>
+
+           
+
+
+
+            <div class="col-5 offset-2">
+                <a asp-action="IndexIssue" asp-controller="Issue" class="btn-primary btn form-control ">Back to List</a>
+            </div>
+            <div class="col-5">
+                <input type="submit" value="Delete" class="btn btn-success form-control" />
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

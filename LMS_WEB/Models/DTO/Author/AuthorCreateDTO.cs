@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace LMS_WEB.Models.DTO
+namespace LMS_WEB.Models.DTO.Author
 {
 
     public class AuthorCreateDTO
@@ -10,6 +10,6 @@ namespace LMS_WEB.Models.DTO
 
         public string Name { get; set; }
 
-    
+
     }
 }
